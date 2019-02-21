@@ -1,28 +1,28 @@
 const knex = require('knex')
 
-const dbConfig = require('../../knexfile')
-const db = knex(dbConfig.development)
+const knexConfig = require('../knexfile')
+const db = knex(knexConfig.development)
 
 module.exports = {
-  getDishes: (id) => {
-    if(id) {
-      return db('dishes').where('id', id)
-    } 
+  getDishes: () => {
     return db('dishes')
+  },
+
+  getDish: (id) => {
+      return db('dishes').where('id', id)
   },
 
   addDish: (dish) => {
     return db('dishes').insert(dish)
   },
 
-  getRecipes: (id) => {
-    if(id) {
-      // find way to join tables also return  the name of dish + ingredients
-      return db('recipes')
-        .select(['dishes.dish_name','recipes.recipe_name']).from('recipes').leftJoin('dishes', 'recipes.dish_id', 'dishes.id').where('recipes.id', id)
-
-    }
+  getRecipes: () => {
     return db('recipes').leftJoin('dishes', 'recipes.dish_id', 'dishes.id')
+  },
+
+  getRecipe: (id) => {
+    return db('recipes')
+     .select(['dishes.dish_name','recipes.recipe_name']).from('recipes').leftJoin('dishes', 'recipes.dish_id', 'dishes.id').where('recipes.id', id)
   },
 
   getIngredients: (id) => {

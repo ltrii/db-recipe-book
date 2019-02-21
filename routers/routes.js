@@ -3,7 +3,7 @@ const recipes = require('./recipesRouter');
 const express = require('express');
 const router = express.Router();
 
-router.use('/', dishes);
-router.use('/', recipes);
+router.use('/api/dishes', dishes);
+router.use('/api/recipes', recipes);
 
 module.exports = router;
