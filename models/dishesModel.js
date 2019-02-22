@@ -9,7 +9,7 @@ module.exports = {
   },
 
   getDish: (id) => {
-      return db('dishes').where('id', id)
+    return db('dishes').where('id', id)
   },
 
   addDish: (dish) => {
